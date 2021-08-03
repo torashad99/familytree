@@ -43,3 +43,11 @@ out/
 # dependencies
 /backend/familytree/node_modules/
 /backend/familytree/src/main/ftreact/node_modules/
+/backend/familytree/src/main/ftreact/.pnp
+/backend/familytree/src/main/ftreact/.pnp.js
+
+# testing
+/backend/familytree/src/main/ftreact/coverage
+
+# production
+/backend/familytree/src/main/ftreact/build
