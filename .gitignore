@@ -51,3 +51,6 @@ out/
 
 # production
 /backend/familytree/src/main/ftreact/build
+
+**/resources/static/dist
+**/application.properties
