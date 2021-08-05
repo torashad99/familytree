@@ -42,15 +42,15 @@ out/
 
 # dependencies
 /backend/familytree/node_modules/
-/backend/familytree/src/main/ftreact/node_modules/
-/backend/familytree/src/main/ftreact/.pnp
-/backend/familytree/src/main/ftreact/.pnp.js
+/backend/familytree/src/main/react/node_modules/
+/backend/familytree/src/main/react/.pnp
+/backend/familytree/src/main/react/.pnp.js
 
 # testing
-/backend/familytree/src/main/ftreact/coverage
+/backend/familytree/src/main/react/coverage
 
 # production
-/backend/familytree/src/main/ftreact/build
+/backend/familytree/src/main/react/build
 
 **/resources/static/dist
 **/application.properties
