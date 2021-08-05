@@ -11,6 +11,12 @@ public interface PersonDao {
 	
 	int insertPerson(String id, Person person);
 	
+	//int insertAncestor(String id, Person person);
+	
+	//int insertDescendant(String id, Person person);
+	
+	//int insertSpouse(String id, Person person);
+	
 	default int insertPerson(Person person) {
 		//System.out.println("From personDao: " + person.getName());
 		//String id = RandomStringUtils.randomAlphanumeric(5);

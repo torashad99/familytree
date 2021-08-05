@@ -1,12 +1,9 @@
 package com.familytree.backend.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.familytree.backend.model.Person;
 
-// This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
-// CRUD refers Create, Read, Update, Delete
-
-public interface UserRepository extends CrudRepository<Person, Integer> {
+public interface UserRepository extends JpaRepository<Person, String> {
 
 }

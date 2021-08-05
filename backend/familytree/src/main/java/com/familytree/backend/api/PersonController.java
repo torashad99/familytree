@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.familytree.backend.model.Ancestors;
+import com.familytree.backend.model.Descendants;
 import com.familytree.backend.model.Person;
+import com.familytree.backend.model.Spouses;
 import com.familytree.backend.service.PersonService;
 
 @RequestMapping("api/v1/person")
@@ -30,9 +33,27 @@ public class PersonController {
 	}
 	
 	@PostMapping
-	public void addPerson(@Valid @NonNull @RequestBody Person person) {
+	public void addPerson(@RequestBody Person person) {
 		//System.out.println("From personController: " + person.getName());
 		personService.addPerson(person);
+	}
+	
+	@PostMapping(path = "{pid}/ancestors") 
+	public void addAncestor(@PathVariable("pid") String pid, @RequestBody Ancestors ancestor) {
+		//System.out.println("From personController: " + person.getName());
+		personService.addAncestor(pid, ancestor);
+	}
+	
+	@PostMapping(path = "{pid}/descendants") 
+	public void addDescendant(@PathVariable("pid") String pid, @RequestBody Descendants descendant) {
+		//System.out.println("From personController: " + person.getName());
+		personService.addDescendant(pid, descendant);
+	}
+	
+	@PostMapping(path = "{pid}/spouses") 
+	public void addSpouse(@PathVariable("pid") String pid, @RequestBody Spouses spouse) {
+		//System.out.println("From personController: " + person.getName());
+		personService.addSpouse(pid, spouse);
 	}
 	
 	@GetMapping
@@ -45,13 +66,28 @@ public class PersonController {
 		return personService.getPersonById(id).orElse(null);
 	}
 	
+	@GetMapping(path = "{pid}/ancestors")
+	public List<Ancestors> getAncestorsById(@PathVariable("pid")String id) {
+		return personService.selectAllAncestors(id);
+	}
+	
+	@GetMapping(path = "{pid}/descendants")
+	public List<Descendants> getDescendantsById(@PathVariable("pid")String id) {
+		return personService.selectAllDescendants(id);
+	}
+	
+	@GetMapping(path = "{pid}/spouses")
+	public List<Spouses> getSpousesById(@PathVariable("pid")String id) {
+		return personService.selectAllSpouses(id);
+	}
+	
 	@DeleteMapping(path = "{pid}")
 	public void deletePerson(@PathVariable("pid") String id) {
 		personService.deletePerson(id);
 	}
 	
 	@PutMapping(path = "{pid}")
-	public void updatePerson(@PathVariable("pid") String id, @Valid @NonNull @RequestBody Person personToUpdate) {
+	public void updatePerson(@PathVariable("pid") String id, @RequestBody Person personToUpdate) {
 		personService.updatePerson(id, personToUpdate);
 	}
 }

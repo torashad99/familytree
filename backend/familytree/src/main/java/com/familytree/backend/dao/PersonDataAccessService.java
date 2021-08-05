@@ -3,6 +3,7 @@ import com.familytree.backend.model.Person;
 
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -21,7 +22,7 @@ public class PersonDataAccessService implements PersonDao {
 	@Override
 	public int insertPerson(String id, Person person) {
 		// TODO Auto-generated method stub
-		Person temp = new Person(id, person.getPname(), person.getDob(), person.getLob());
+		Person temp = new Person(id, person.getFname(), person.getLname(), person.getGender(), person.getDob(), person.getDod(), person.getLob(), person.getLod());
 		userRepository.save(temp);
 		return 1;
 	}
@@ -47,18 +48,28 @@ public class PersonDataAccessService implements PersonDao {
 		if(personMaybe.isEmpty()) {
 			return 0;
 		}
-		//DB.remove(personMaybe.get());
 		userRepository.delete(personMaybe.get());
 		return 1;
 	}
 
 	@Override
 	public int updatePersonById(String id, Person update) {
-		// TODO Auto-generated method stub
-		int flag = deletePersonById(id);
-		if(flag == 0) return 0;
-		update.setPID(id);
-		userRepository.save(update);
+
+		try {
+			
+		Person toChange = selectPersonById(id).orElseThrow();
+		toChange.setFname(update.getFname());
+		toChange.setLname(update.getLname());
+		toChange.setGender(update.getGender());
+		toChange.setDob(update.getDob());
+		toChange.setDod(update.getDod());
+		toChange.setLob(update.getLob());
+		toChange.setLod(update.getLod());
+		userRepository.save(toChange);
+		
+		}catch(NoSuchElementException e) {
+			
+		}
 		return 1;
 	}
 	
